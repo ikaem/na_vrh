@@ -1,17 +1,40 @@
-# na_vrh
+# na_vrh app
 
-A new Flutter project.
+Flutter app for logging mountain summits. Android is the target for now. The `ios/` folder is generated so it is ready later, but iOS is not built or tested yet.
 
-## Getting Started
+The Flutter version is pinned for the whole repository. Install FVM and the pinned version first, as described in the [root README](../README.md#flutter-version-fvm), and use `fvm flutter ...` for every command below.
 
-This project is a starting point for a Flutter application.
+## Requirements
 
-A few resources to get you started if this is your first Flutter project:
+- Android Studio or the Android SDK command-line tools, and an Android device or emulator.
+- A JDK, version 17 or newer. Android Studio includes one. If you only use the command-line tools, install a JDK separately and make sure `JAVA_HOME` is set.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Setup
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+From the `app/` folder:
+
+```bash
+fvm flutter pub get    # installs the Dart dependencies
+```
+
+## Run
+
+Start an emulator or connect a device, then:
+
+```bash
+fvm flutter run
+```
+
+In VS Code, use the `na_vrh (debug)` launch configuration instead.
+
+## Test and check
+
+```bash
+fvm flutter test       # run all tests
+fvm flutter analyze    # static analysis
+fvm dart format .      # format the code
+```
+
+## Package ID
+
+`xyz.imkaem.navrh` on both Android and iOS.
