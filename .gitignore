@@ -1,0 +1,16 @@
+# Repo-wide ignores. Each package (app/, tools/...) can add its own on top.
+# app/ already has Flutter, Android and iOS rules in its own .gitignore files.
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+*.iml
+
+# Dart and Flutter tooling, so every Dart package in the monorepo is covered
+.dart_tool/
+
+# Local FVM SDK link (the .fvmrc pin file is committed)
+.fvm/
