@@ -92,6 +92,19 @@ Rules:
 - Clear, active voice. Describe what changed, not why.
 - Examples: `feat: add route table to the database schema`, `test: add haversine distance tests`.
 
+## Pull request message
+
+When the last unit of a ticket is done and its acceptance criteria are met, suggest a PR title and description along with the final commit message. Do not create the PR. The user does that.
+
+- **Title:** the ticket ID and name, for example `1.1 Create the Flutter project`.
+- **Description:**
+  - What the ticket delivers, in a few lines.
+  - The commits or units it was built in.
+  - How each acceptance criterion was verified, and anything that was not verified (for example, not run on a device) and why.
+  - Decisions made during implementation, especially any that changed the ticket or spec.
+  - A link to the ticket file in `project/tickets/`.
+- The commit messages say what changed. The "why" belongs in the PR description.
+
 ## Code conventions
 
 - Dart files: snake_case names, one main public class per file, tests mirror source paths under `test/`.
