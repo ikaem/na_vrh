@@ -29,7 +29,7 @@ Read `project/SPEC.md` before making product or data-model decisions. It is the 
 ## Tech stack
 
 - Flutter (Dart), Android is the target. The `ios/` folder is generated but iOS is not built or tested yet.
-- Flutter version pinned with FVM. Use `fvm flutter ...`, not plain `flutter`.
+- Flutter version pinned with FVM, in a single `.fvmrc` at the repo root shared by every Dart and Flutter package. Use `fvm flutter ...` and `fvm dart ...`, not plain `flutter` or `dart`.
 - Drift (SQLite) for the local database, with versioned migrations.
 - Riverpod for state management.
 - go_router for navigation.

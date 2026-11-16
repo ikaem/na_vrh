@@ -14,3 +14,6 @@ Thumbs.db
 
 # Local FVM SDK link (the .fvmrc pin file is committed)
 .fvm/
+
+# Kotlin compiler session files, created while Gradle builds the Android app
+.kotlin/

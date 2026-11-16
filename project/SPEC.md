@@ -260,7 +260,7 @@ Moved to [todo.md](./todo.md).
 
 **Repo layout:** a monorepo. The Flutter app is in `app/`, the pipeline script in `tools/peak_pipeline/`, and project docs in `project/`. A server or watch app, if built, would get their own top-level folders.
 
-**Tooling:** the Flutter version is pinned with FVM. The package ID is `xyz.imkaem.navrh`. A Makefile wraps the common commands (run, test, build).
+**Tooling:** the Flutter version is pinned with FVM in a single `.fvmrc` at the repo root, shared by every Dart and Flutter package in the monorepo. The package ID is `xyz.imkaem.navrh`. A Makefile wraps the common commands (run, test, build).
 
 | Concern | Choice | Notes |
 |---|---|---|
