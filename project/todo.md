@@ -31,3 +31,7 @@ Items that are not scheduled into an epic yet. Moved here from [SPEC.md](./SPEC.
   - Sync will need `updated_at` and a deleted flag (instead of removing rows) on the synced tables. Can be added later through the migration system. UUID IDs are already in place.
   - If the watch app is Flutter, the pure Dart logic (haversine, averaging, route state, duration) can be shared. If native Kotlin, it has to be rewritten or stay on the phone.
   - No schema or ticket changes needed now.
+- [ ] Install a separate JDK (17 or newer) and use it for Android builds, instead of relying on the JDK bundled with Android Studio.
+  - Why: on this machine Flutter found its JDK only through Android Studio's snap install. Flutter locates Android Studio through `~/.cache/Google/AndroidStudio*/.home`, and each file points to a specific snap revision. After a snap update deletes the old revision, those files point to a missing folder, Flutter finds no JDK, and builds fail with "JAVA_HOME is not set" until Android Studio is started once (this happened on 2026-11-16).
+  - What: install a JDK (for example an OpenJDK package), then tell Flutter to use it with `fvm flutter config --jdk-dir <path>` or set `JAVA_HOME`.
+  - Then: update the JDK requirement in `app/README.md` to say which JDK to use and how Flutter is pointed at it.

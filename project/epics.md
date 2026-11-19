@@ -5,7 +5,7 @@ Derived from [SPEC.md](./SPEC.md). Section numbers refer to that file. Tickets f
 ## Epics
 
 1. **Project foundations** (sec 10, 14)
-   Flutter project, folder structure, navigation setup, Riverpod and Drift setup, linting, a basic CI job that runs tests, and schema v1 with the migration setup.
+   Flutter project, folder structure, navigation setup, a Makefile for common commands (run, test, build), Riverpod and Drift setup, linting, a basic CI job that runs tests, and schema v1 with the migration setup.
 
 2. **Peak data pipeline** (sec 4, 14)
    The Dart script that queries Overpass and writes the deterministic peaks file, plus the spot check of known peaks.

@@ -19,7 +19,7 @@ Personal tool first. Rankings or social features are out of scope, but the data 
 - Map tiles or route tracking.
 - Anti-cheat (mock location detection is optional and low priority).
 - Peaks outside Croatia.
-- iOS (Android only for now, see section 14).
+- Building, testing, or releasing for iOS (the platform folder is generated and ready, see section 14).
 - Destinations that are not peaks (free-form points).
 - A custom in-app camera screen (the OS camera and photo picker are used).
 
@@ -256,7 +256,11 @@ Moved to [todo.md](./todo.md).
 
 ## 14. Tech stack
 
-**Platform:** Flutter (Dart), Android only for now. Flutter keeps iOS possible later, mainly by adding iOS permission strings.
+**Platform:** Flutter (Dart). Android is the target for now. The iOS platform folder is generated from the start so it is ready later, but iOS is not built, tested, or released yet (it would mainly need iOS permission strings and signing).
+
+**Repo layout:** a monorepo. The Flutter app is in `app/`, the pipeline script in `tools/peak_pipeline/`, and project docs in `project/`. A server or watch app, if built, would get their own top-level folders.
+
+**Tooling:** the Flutter version is pinned with FVM in a single `.fvmrc` at the repo root, shared by every Dart and Flutter package in the monorepo. The package ID is `xyz.imkaem.navrh`. A Makefile wraps the common commands (run, test, build).
 
 | Concern | Choice | Notes |
 |---|---|---|
