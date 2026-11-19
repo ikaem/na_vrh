@@ -52,7 +52,7 @@ Work is done in atomic units, not in whole tickets.
 - Each unit must be small enough to review in one sitting.
 - A single commit may change only one production file, plus its directly matching test file when the unit has real logic.
 - No jumping ahead and no batching. A type, the code that consumes it, and the UI that renders it are separate units in separate commits.
-- At every stop, give a suggested commit message. Never run `git commit`, `git push`, or PR commands unless explicitly told to. The only exception is creating and checking out an approved ticket branch (see Branching).
+- At every stop, give a suggested commit message. Do not include a `Co-Authored-By` line (or any other attribution trailer) in suggested commit messages. Never run `git commit`, `git push`, or PR commands unless explicitly told to. The only exception is creating and checking out an approved ticket branch (see Branching).
 - Start from shared, foundational pieces that are needed whatever the design turns out to be, so nothing gets thrown away later.
 - Docs and planning files (the spec, epics, tickets, todo) are not code. They are not subject to the one-file-per-commit rule.
 
