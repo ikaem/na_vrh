@@ -52,7 +52,7 @@ Work is done in atomic units, not in whole tickets.
 - Each unit must be small enough to review in one sitting.
 - A single commit may change only one production file, plus its directly matching test file when the unit has real logic.
 - No jumping ahead and no batching. A type, the code that consumes it, and the UI that renders it are separate units in separate commits.
-- At every stop, give a suggested commit message. Never run `git commit`, `git push`, or PR commands unless explicitly told to. The only exception is creating and checking out an approved ticket branch (see Branching).
+- At every stop, give a suggested commit message. Do not include a `Co-Authored-By` line (or any other attribution trailer) in suggested commit messages. Never run `git commit`, `git push`, or PR commands unless explicitly told to. The only exception is creating and checking out an approved ticket branch (see Branching).
 - Start from shared, foundational pieces that are needed whatever the design turns out to be, so nothing gets thrown away later.
 - Docs and planning files (the spec, epics, tickets, todo) are not code. They are not subject to the one-file-per-commit rule.
 
@@ -107,9 +107,10 @@ When the last unit of a ticket is done and its acceptance criteria are met, sugg
 
 ## Code conventions
 
-- Dart files: snake_case names, one main public class per file, tests mirror source paths under `test/`.
-- Use package imports (`package:na_vrh/...`) across folders.
-- Layout inside `app/lib/`: `core/`, `data/database/`, and `features/<feature>/{data,domain,presentation}/`. See ticket 1.2 for the full rules.
+- Dart files: snake_case names, one main public class per file.
+- Tests mirror source paths: `lib/src/x.dart` is tested by `test/src/x_test.dart`. Shared test helpers live in `test/helpers/`.
+- Use package imports (`package:na_vrh/src/...`) across folders.
+- Layout inside `app/lib/`: `main.dart` plus `src/`. In `src/`: the app layer (`app.dart`, `home_screen.dart`, later `app_router.dart`), `core/`, `data/database/`, and `features/<feature>/{data,domain,presentation}/`. The app layer may import features. Features and `core/` never import it. See ticket 1.2 for the full rules.
 - All timestamps are stored and compared in UTC.
 - IDs are client-generated UUIDs stored as text.
 - Never match peaks by name. Key on the OSM ID.
