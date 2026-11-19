@@ -19,7 +19,14 @@ Items that are not scheduled into an epic yet. Moved here from [SPEC.md](./SPEC.
 - [ ] Destinations that are not peaks (free-form points).
 - [ ] Automatic cloud backup (needs accounts or a server).
 - [ ] Multi-device sync (client UUIDs already allow idempotent sync).
-- [ ] Region downloads and other countries.
+- [ ] Figure out how to support other countries: peaks, maps, and per-country config. Not designed yet. Maybe the user picks countries from a dropdown or list, and the app downloads what that country needs. Things to figure out:
+  - What a "country pack" contains: the peaks file for the country, map data (maps are a v1 non-goal, see SPEC.md), and any per-country config (for example which name tag to show, such as `name:hr`).
+  - Where packs are hosted and how the app downloads them. SPEC.md suggests static files, for example on Cloudflare R2, and notes this only pays off once maps or more countries exist.
+  - Generalizing the peak data pipeline (epic 2) to run per country, and the monthly refresh job (epic 11) to cover each country.
+  - The user experience: choosing countries up front, downloading before a trip, and removing a country to free storage.
+  - What happens to logged climbs when a country pack is removed. The route snapshot of the peak (SPEC.md section 4) should keep old climbs readable, but this needs checking.
+  - Peak identity across countries: OSM IDs are global, so they should stay unique, but peaks near borders may fall under two countries.
+  - Search and the peak picker with several countries loaded (SPEC.md section 5).
 - [ ] Rankings (manual entries excluded).
 - [ ] Peak picker filters by region or minimum elevation.
 - [ ] Smartwatch companion app (Wear OS first). Notes from the discussion (verify current Flutter and Wear OS status before deciding):
