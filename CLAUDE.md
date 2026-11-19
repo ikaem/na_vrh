@@ -107,9 +107,10 @@ When the last unit of a ticket is done and its acceptance criteria are met, sugg
 
 ## Code conventions
 
-- Dart files: snake_case names, one main public class per file, tests mirror source paths under `test/`.
-- Use package imports (`package:na_vrh/...`) across folders.
-- Layout inside `app/lib/`: `core/`, `data/database/`, and `features/<feature>/{data,domain,presentation}/`. See ticket 1.2 for the full rules.
+- Dart files: snake_case names, one main public class per file.
+- Tests mirror source paths: `lib/src/x.dart` is tested by `test/src/x_test.dart`. Shared test helpers live in `test/helpers/`.
+- Use package imports (`package:na_vrh/src/...`) across folders.
+- Layout inside `app/lib/`: `main.dart` plus `src/`. In `src/`: the app layer (`app.dart`, `home_screen.dart`, later `app_router.dart`), `core/`, `data/database/`, and `features/<feature>/{data,domain,presentation}/`. The app layer may import features. Features and `core/` never import it. See ticket 1.2 for the full rules.
 - All timestamps are stored and compared in UTC.
 - IDs are client-generated UUIDs stored as text.
 - Never match peaks by name. Key on the OSM ID.
