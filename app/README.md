@@ -37,7 +37,7 @@ fvm dart format .      # format the code
 
 ## Code generation
 
-Riverpod providers are written with the `@riverpod` annotation, and `build_runner` generates the matching `*.g.dart` files (Drift will use the same tool from ticket 1.5).
+Riverpod providers are written with the `@riverpod` annotation, and `build_runner` generates the matching `*.g.dart` files. Drift uses the same tool for the database code.
 
 ```bash
 fvm dart run build_runner build    # generate once (the first run takes about 30 seconds)
