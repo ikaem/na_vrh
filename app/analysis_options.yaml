@@ -8,6 +8,9 @@ analyzer:
     - build/**
     - android/**
     - ios/**
+    # Generated code (Riverpod, and Drift from ticket 1.5). Drift's output
+    # triggers an unused_field warning otherwise.
+    - '**/*.g.dart'
   language:
     # No implicit downcasts from dynamic.
     strict-casts: true

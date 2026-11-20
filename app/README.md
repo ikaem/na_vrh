@@ -35,6 +35,36 @@ fvm flutter analyze    # static analysis
 fvm dart format .      # format the code
 ```
 
+## Code generation
+
+Riverpod providers are written with the `@riverpod` annotation, and `build_runner` generates the matching `*.g.dart` files (Drift will use the same tool from ticket 1.5).
+
+```bash
+fvm dart run build_runner build    # generate once (the first run takes about 30 seconds)
+fvm dart run build_runner watch    # regenerate on every change while developing
+```
+
+- Generated files are committed, in the same commit as the annotated file that produces them. A fresh clone runs and tests without a codegen step.
+- After changing annotated code, regenerate and commit the result together with it. A stale generated file is easy to miss, so always regenerate before committing.
+- Generated files are excluded from analysis (see `analysis_options.yaml`).
+
+## State management
+
+State is managed with [Riverpod](https://riverpod.dev), using code generation.
+
+- **Writing providers:** use the `@riverpod` annotation.
+  - A function for a simple or read-only provider. A class (a notifier) when there is state with methods.
+  - Parameters are plain function arguments, and generate a family provider (`xyzProvider(arg)`).
+  - Annotated functions take a plain `Ref ref`.
+  - Each file with annotated providers has a `part 'name.g.dart';` line.
+  - Do not use the legacy provider types. The package keeps them behind a separate `legacy.dart` import, so do not import that.
+- **Where providers live:**
+  - Repository and service providers go in the feature's `data/`. The database provider goes in `data/database/`.
+  - UI state providers go in `presentation/`.
+  - `domain/` never imports Riverpod. It stays plain Dart.
+- **The root:** `main.dart` runs the app inside a `ProviderScope`.
+- **Tests:** override providers with `ProviderScope(overrides: [...])` in widget tests, and `ProviderContainer(overrides: [...])` in unit tests.
+
 ## Project structure and conventions
 
 ```
@@ -50,9 +80,9 @@ app/
 │       │   └── database/         # Drift database, tables, migrations
 │       └── features/
 │           └── <feature>/
-│               ├── data/         # repositories, database access
+│               ├── data/         # repositories, database access, their Riverpod providers
 │               ├── domain/       # plain Dart models and pure logic (unit-tested)
-│               └── presentation/ # screens, widgets, Riverpod providers
+│               └── presentation/ # screens, widgets, UI state providers
 └── test/
     ├── helpers/                  # shared test helpers, not mirrored from lib
     └── src/                      # mirrors lib/src/
@@ -63,9 +93,9 @@ Folders are created by the first ticket that needs them, so `core/`, `data/datab
 - **The app layer:** `main.dart` and the files at the top of `lib/src/` (`app.dart`, `home_screen.dart`, later `app_router.dart`). It composes features and may import them. Features and `core/` never import it.
 - **Home is not a feature.** The current home screen is a placeholder. Its real content will come from other features, so it lives in the app layer. When the designs are decided, it either becomes one feature's screen or stays an app-level shell.
 - **Layers inside a feature:**
-  - `data/`: repositories and database access.
-  - `domain/`: plain Dart models and pure logic (no Flutter, no Drift imports), so it can be unit-tested directly.
-  - `presentation/`: screens, widgets, and Riverpod providers.
+  - `data/`: repositories, database access, and the Riverpod providers that expose them.
+  - `domain/`: plain Dart models and pure logic (no Flutter, Drift or Riverpod imports), so it can be unit-tested directly.
+  - `presentation/`: screens, widgets, and UI state providers.
 - **Boundaries:** a feature may use `core/` and `data/database/`. It does not import another feature's `presentation/`. Shared logic between features moves down into `core/`.
 - **Imports:** package imports (`package:na_vrh/src/...`), not relative paths, across folders.
 - **Why `src/`:** it keeps `lib/` to a single entry file and matches the Dart package layout. Nothing outside the app imports it, so it is a layout choice, not a privacy boundary.
