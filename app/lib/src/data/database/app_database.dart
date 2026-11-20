@@ -12,4 +12,14 @@ class AppDatabase extends _$AppDatabase {
 
   @override
   int get schemaVersion => 1;
+
+  // Create and upgrade steps are added in ticket 1.10.
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+    beforeOpen: (details) async {
+      // SQLite leaves foreign keys off by default. The delete rules depend
+      // on them, so turn them on for every connection.
+      await customStatement('PRAGMA foreign_keys = ON');
+    },
+  );
 }
