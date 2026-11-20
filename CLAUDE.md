@@ -31,7 +31,7 @@ Read `project/SPEC.md` before making product or data-model decisions. It is the 
 - Flutter (Dart), Android is the target. The `ios/` folder is generated but iOS is not built or tested yet.
 - Flutter version pinned with FVM, in a single `.fvmrc` at the repo root shared by every Dart and Flutter package. Use `fvm flutter ...` and `fvm dart ...`, not plain `flutter` or `dart`.
 - Drift (SQLite) for the local database, with versioned migrations.
-- Riverpod for state management.
+- Riverpod for state management, with code generation (`riverpod_generator`). Generate with `fvm dart run build_runner build` (or `watch` while developing). See `app/README.md`.
 - go_router for navigation.
 - Package ID: `xyz.imkaem.navrh`.
 - A Makefile wraps the common commands (run, test, build) once it exists.
@@ -50,7 +50,7 @@ Work is done in atomic units, not in whole tickets.
 **Standing rules:**
 - A ticket is not a unit. One ticket usually splits into several units, each with its own stop and commit.
 - Each unit must be small enough to review in one sitting.
-- A single commit may change only one production file, plus its directly matching test file when the unit has real logic.
+- A single commit may change only one production file, plus its directly matching test file when the unit has real logic. A generated `*.g.dart` file is committed in the same commit as the file that produces it and does not count as a second production file. Generated files are committed, so regenerate before committing.
 - No jumping ahead and no batching. A type, the code that consumes it, and the UI that renders it are separate units in separate commits.
 - At every stop, give a suggested commit message. Do not include a `Co-Authored-By` line (or any other attribution trailer) in suggested commit messages. Never run `git commit`, `git push`, or PR commands unless explicitly told to. The only exception is creating and checking out an approved ticket branch (see Branching).
 - Start from shared, foundational pieces that are needed whatever the design turns out to be, so nothing gets thrown away later.
@@ -83,7 +83,7 @@ Rules:
 - TDD for anything with real logic: domain code, repositories, parsers, the pipeline script, state transitions. The test is written first, and it lives in the same commit as the code it covers.
 - Pure wiring and static UI (an empty screen, a plain layout) don't need tests.
 - Structure every test body with `// given`, `// when`, `// then` comments marking the setup, the action under test, and the assertion.
-- Pure logic belongs in each feature's `domain/` folder (no Flutter or Drift imports) so it can be unit-tested without a device.
+- Pure logic belongs in each feature's `domain/` folder (no Flutter, Drift or Riverpod imports) so it can be unit-tested without a device.
 - GPS behavior can only be verified on a real phone. Don't claim GPS behavior works from unit tests alone.
 
 ## Commit message format
