@@ -48,6 +48,15 @@ fvm dart run build_runner watch    # regenerate on every change while developing
 - After changing annotated code, regenerate and commit the result together with it. A stale generated file is easy to miss, so always regenerate before committing.
 - Generated files are excluded from analysis (see `analysis_options.yaml`).
 
+## Dates
+
+Dates are stored as UTC and read back as UTC.
+
+- `app/build.yaml` sets Drift's `store_date_time_values_as_text: true`, so every `DateTime` column is stored as ISO-8601 UTC text, for example `2026-01-02T03:04:05.678009Z`. The same instant comes back as a UTC `DateTime`, with milliseconds and microseconds intact.
+- Drift's default is integer seconds, which drops the sub-second part and reads back as local time. That would break the spec's "always UTC" rule, so do not remove the option.
+- Pass UTC values when writing (`DateTime.now().toUtc()`). Convert to local time only at the display edge.
+- SQL compares dates as text. UTC ISO strings sort correctly, so ordering and range queries work as expected.
+
 ## State management
 
 State is managed with [Riverpod](https://riverpod.dev), using code generation.
