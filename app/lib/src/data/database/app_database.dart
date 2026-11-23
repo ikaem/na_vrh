@@ -1,6 +1,10 @@
 import 'package:drift/drift.dart';
 
 import 'package:na_vrh/src/data/database/tables/expeditions.dart';
+import 'package:na_vrh/src/data/database/tables/routes.dart';
+// Needed here, not only in routes.dart: the generated part file sees only
+// this file's imports, and it uses the enum types.
+import 'package:na_vrh/src/features/expeditions/domain/route_enums.dart';
 
 part 'app_database.g.dart';
 
@@ -8,7 +12,7 @@ part 'app_database.g.dart';
 ///
 /// The executor is injected so tests can pass an in-memory database and the
 /// app can pass the on-device one.
-@DriftDatabase(tables: [Expeditions])
+@DriftDatabase(tables: [Expeditions, Routes])
 class AppDatabase extends _$AppDatabase {
   AppDatabase(super.e);
 
