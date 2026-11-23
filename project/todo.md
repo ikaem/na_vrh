@@ -19,6 +19,7 @@ Items that are not scheduled into an epic yet. Moved here from [SPEC.md](./SPEC.
 - [ ] Destinations that are not peaks (free-form points).
 - [ ] Automatic cloud backup (needs accounts or a server).
 - [ ] Multi-device sync (client UUIDs already allow idempotent sync).
+- [ ] Server and personal web dashboard for each user. An idea only, nothing is decided or designed yet. Each user would have their own account, upload their data from the app, and explore it in a nice browser environment, with graphics, images and so on. Questions for when it is picked up: accounts and auth, what gets uploaded (routes, readings, photos), how it relates to cloud backup and multi-device sync above (probably the same server), what the dashboard shows, and hosting.
 - [ ] Figure out how to support other countries: peaks, maps, and per-country config. Not designed yet. Maybe the user picks countries from a dropdown or list, and the app downloads what that country needs. Things to figure out:
   - What a "country pack" contains: the peaks file for the country, map data (maps are a v1 non-goal, see SPEC.md), and any per-country config (for example which name tag to show, such as `name:hr`).
   - Where packs are hosted and how the app downloads them. SPEC.md suggests static files, for example on Cloudflare R2, and notes this only pays off once maps or more countries exist.
