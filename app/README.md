@@ -97,7 +97,7 @@ app/
     └── src/                      # mirrors lib/src/
 ```
 
-Folders are created by the first ticket that needs them, so `core/`, `data/database/` and `features/` do not exist yet.
+Folders are created by the first ticket that needs them, so `core/` does not exist yet.
 
 - **The app layer:** `main.dart` and the files at the top of `lib/src/` (`app.dart`, `home_screen.dart`, later `app_router.dart`). It composes features and may import them. Features and `core/` never import it.
 - **Home is not a feature.** The current home screen is a placeholder. Its real content will come from other features, so it lives in the app layer. When the designs are decided, it either becomes one feature's screen or stays an app-level shell.
@@ -105,11 +105,11 @@ Folders are created by the first ticket that needs them, so `core/`, `data/datab
   - `data/`: repositories, database access, and the Riverpod providers that expose them.
   - `domain/`: plain Dart models and pure logic (no Flutter, Drift or Riverpod imports), so it can be unit-tested directly.
   - `presentation/`: screens, widgets, and UI state providers.
-- **Boundaries:** a feature may use `core/` and `data/database/`. It does not import another feature's `presentation/`. Shared logic between features moves down into `core/`.
+- **Boundaries:** a feature may use `core/` and `data/database/`. It does not import another feature's `presentation/`. Shared logic between features moves down into `core/`. `data/database/` may import a feature's pure-Dart `domain/` enums (for example the route enums used by the `Routes` table), and `domain/` never imports from the data layer.
 - **Imports:** package imports (`package:na_vrh/src/...`), not relative paths, across folders.
 - **Why `src/`:** it keeps `lib/` to a single entry file and matches the Dart package layout. Nothing outside the app imports it, so it is a layout choice, not a privacy boundary.
 - **Tests:** a test mirrors its source path. `lib/src/x.dart` is tested by `test/src/x_test.dart`. Shared helpers (provider overrides, in-memory database, router pumping) live in `test/helpers/`. `main.dart` has no test, since it only calls `runApp`.
-- **Files:** snake_case names, one main public class per file.
+- **Files:** snake_case names, one main public class per file. Small related enums may share a file (for example `route_enums.dart`).
 
 ## Package ID
 

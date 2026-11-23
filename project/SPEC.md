@@ -201,7 +201,7 @@ Version the schema from day one, with migrations.
 - climbed_at (nullable until completed; GPS timestamp, used for the date)
 - duration_s (nullable)
 - source: `gps` | `manual`
-- tolerance_m (the tolerance used)
+- tolerance_m (the tolerance used; nullable, since a planned or manual route has no tolerance yet)
 - estimated_lat, estimated_lon, distance_m, estimation_method (nullable until detected)
 - cover_photo_id (nullable)
 - notes (optional)
